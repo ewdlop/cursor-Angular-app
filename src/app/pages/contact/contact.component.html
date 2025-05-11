@@ -1,0 +1,106 @@
+<div class="contact-container">
+  <h1>联系我们</h1>
+  
+  <div class="contact-content">
+    <div class="contact-info">
+      <h2>联系方式</h2>
+      <p><i class="fas fa-envelope"></i> 邮箱：contact&#64;example.com</p>
+      <p><i class="fas fa-phone"></i> 电话：+86 123 4567 8900</p>
+      <p><i class="fas fa-map-marker-alt"></i> 地址：北京市朝阳区xxx街道</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="contact-form">
+      <div class="form-group">
+        <label for="name">姓名</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          [(ngModel)]="formData.name" 
+          required
+          [class.error]="formErrors.name"
+        >
+        <div class="error-message" *ngIf="formErrors.name">{{ formErrors.name }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">邮箱</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="formData.email" 
+          required
+          [class.error]="formErrors.email"
+        >
+        <div class="error-message" *ngIf="formErrors.email">{{ formErrors.email }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">主题</label>
+        <select 
+          id="subject" 
+          name="subject" 
+          [(ngModel)]="formData.subject" 
+          required
+          [class.error]="formErrors.subject"
+        >
+          <option value="">请选择主题</option>
+          <option *ngFor="let option of subjectOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+        <div class="error-message" *ngIf="formErrors.subject">{{ formErrors.subject }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">留言</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          [(ngModel)]="formData.message" 
+          required
+          [class.error]="formErrors.message"
+        ></textarea>
+        <div class="error-message" *ngIf="formErrors.message">{{ formErrors.message }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="attachment">附件</label>
+        <div class="file-upload">
+          <input 
+            type="file" 
+            id="attachment" 
+            name="attachment" 
+            (change)="onFileSelected($event)"
+            accept=".pdf,.doc,.docx,.txt"
+          >
+          <div class="file-info" *ngIf="fileName">
+            <span>{{ fileName }}</span>
+            <button type="button" class="remove-file" (click)="removeFile()" title="删除文件">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="reset-btn" (click)="resetForm()" [disabled]="isSubmitting">
+          重置
+        </button>
+        <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+          {{ isSubmitting ? '提交中...' : '提交' }}
+        </button>
+      </div>
+
+      <div class="form-messages">
+        <div class="success-message" *ngIf="submitSuccess">
+          感谢您的留言！我们会尽快回复。
+        </div>
+        <div class="error-message" *ngIf="submitError">
+          {{ submitError }}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
