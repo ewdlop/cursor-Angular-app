@@ -6,5 +6,20 @@
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">首页</a>
     <a routerLink="/about" routerLinkActive="active">关于</a>
     <a routerLink="/contact" routerLinkActive="active">联系我们</a>
+    
+    <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+      <a routerLink="/profile" routerLinkActive="active">
+        <i class="fas fa-user"></i> 个人资料
+      </a>
+      <a (click)="logout()" class="logout-link">
+        <i class="fas fa-sign-out-alt"></i> 退出
+      </a>
+    </ng-container>
+    
+    <ng-template #notLoggedIn>
+      <a routerLink="/login" routerLinkActive="active">
+        <i class="fas fa-sign-in-alt"></i> 登录
+      </a>
+    </ng-template>
   </div>
 </nav>

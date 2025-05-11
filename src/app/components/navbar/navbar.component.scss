@@ -19,6 +19,7 @@
   .navbar-menu {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
 
     a {
       color: white;
@@ -26,6 +27,14 @@
       padding: 0.5rem 1rem;
       border-radius: 4px;
       transition: background-color 0.3s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      i {
+        font-size: 1rem;
+      }
 
       &:hover {
         background-color: rgba(255,255,255,0.1);
@@ -33,6 +42,14 @@
 
       &.active {
         background-color: rgba(255,255,255,0.2);
+      }
+
+      &.logout-link {
+        background-color: rgba(220, 53, 69, 0.1);
+        
+        &:hover {
+          background-color: rgba(220, 53, 69, 0.2);
+        }
       }
     }
   }
