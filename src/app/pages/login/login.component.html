@@ -1,0 +1,52 @@
+<div class="login-container">
+  <section class="hero">
+    <h1>欢迎回来</h1>
+    <p>登录您的账号，继续您的旅程</p>
+  </section>
+
+  <div class="login-content">
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">邮箱</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="formData.email" 
+          required
+          [class.error]="formErrors.email">
+        <div class="error-message" *ngIf="formErrors.email">
+          {{ formErrors.email }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          [(ngModel)]="formData.password" 
+          required
+          [class.error]="formErrors.password">
+        <div class="error-message" *ngIf="formErrors.password">
+          {{ formErrors.password }}
+        </div>
+      </div>
+
+      <div class="form-messages">
+        <div class="error-message" *ngIf="submitError">
+          {{ submitError }}
+        </div>
+      </div>
+
+      <button type="submit" class="btn" [disabled]="isSubmitting">
+        {{ isSubmitting ? '登录中...' : '登录' }}
+      </button>
+
+      <div class="register-link">
+        还没有账号？<a routerLink="/register">立即注册</a>
+      </div>
+    </form>
+  </div>
+</div> 

@@ -11,6 +11,13 @@ import { ContactService, ContactFormData, SubjectOption } from '../../services/c
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  contactInfo = {
+    address: '北京市朝阳区科技园区88号',
+    phone: '+86 10 8888 8888',
+    email: 'contact@example.com',
+    hours: '周一至周五: 9:00 - 18:00'
+  };
+
   formData: ContactFormData = {
     name: '',
     email: '',

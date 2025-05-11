@@ -1,23 +1,23 @@
-<nav class="navbar">
-  <div class="navbar-brand">
+<nav class="navbar" [@fadeInOut]>
+  <div class="navbar-brand" [@scaleInOut]>
     <a routerLink="/" class="logo">My Angular App</a>
   </div>
   <div class="navbar-menu">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">首页</a>
-    <a routerLink="/about" routerLinkActive="active">关于</a>
-    <a routerLink="/contact" routerLinkActive="active">联系我们</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [@slideInOut]>首页</a>
+    <a routerLink="/about" routerLinkActive="active" [@slideInOut]>关于</a>
+    <a routerLink="/contact" routerLinkActive="active" [@slideInOut]>联系我们</a>
     
     <ng-container *ngIf="isLoggedIn; else notLoggedIn">
-      <a routerLink="/profile" routerLinkActive="active">
+      <a routerLink="/profile" routerLinkActive="active" [@slideInOut]>
         <i class="fas fa-user"></i> 个人资料
       </a>
-      <a (click)="logout()" class="logout-link">
+      <a (click)="logout()" class="logout-link" [@slideInOut]>
         <i class="fas fa-sign-out-alt"></i> 退出
       </a>
     </ng-container>
     
     <ng-template #notLoggedIn>
-      <a routerLink="/login" routerLinkActive="active">
+      <a routerLink="/login" routerLinkActive="active" [@slideInOut]>
         <i class="fas fa-sign-in-alt"></i> 登录
       </a>
     </ng-template>

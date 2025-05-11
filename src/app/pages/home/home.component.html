@@ -1,18 +1,27 @@
 <div class="home-container">
-  <h1>欢迎来到我的 Angular 应用</h1>
-  <p>这是一个使用 Angular 构建的现代化 Web 应用。</p>
-  <div class="features">
-    <div class="feature-card">
-      <h3>响应式设计</h3>
-      <p>完美适配各种设备尺寸</p>
+  <section class="hero">
+    <h1>欢迎使用 Angular 应用</h1>
+    <p>一个现代化的、功能完整的 Web 应用程序</p>
+    <div class="cta-buttons">
+      <a routerLink="/register" class="btn btn-primary">立即注册</a>
+      <a routerLink="/about" class="btn btn-secondary">了解更多</a>
     </div>
-    <div class="feature-card">
-      <h3>现代化UI</h3>
-      <p>简洁优雅的用户界面</p>
+  </section>
+
+  <section class="features">
+    <h2>主要功能</h2>
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let feature of features">
+        <i [class]="feature.icon"></i>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>高性能</h3>
-      <p>快速加载和流畅的交互体验</p>
-    </div>
-  </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>准备好开始了吗？</h2>
+    <p>立即加入我们，体验现代化的 Web 应用</p>
+    <a routerLink="/register" class="btn btn-primary">免费注册</a>
+  </section>
 </div>
