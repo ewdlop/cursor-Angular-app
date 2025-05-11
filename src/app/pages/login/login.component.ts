@@ -64,10 +64,16 @@ export class LoginComponent {
       this.submitError = '';
 
       this.userService.login(this.formData.email, this.formData.password).subscribe({
-        next: () => {
-          this.router.navigate(['/']);
+        next: (user) => {
+          console.log('登录成功:', user);
+          this.router.navigate(['/home']).then(() => {
+            console.log('导航到首页');
+          }).catch(error => {
+            console.error('导航失败:', error);
+          });
         },
         error: (error) => {
+          console.error('登录失败:', error);
           this.submitError = error.error?.message || '登录失败，请检查邮箱和密码';
           this.isSubmitting = false;
         }

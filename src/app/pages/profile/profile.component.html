@@ -1,0 +1,76 @@
+<div class="profile-container">
+  <section class="hero">
+    <h1>个人资料</h1>
+    <p>管理您的个人信息</p>
+  </section>
+
+  <div class="profile-content">
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="avatar">
+          <span>{{ user?.username?.charAt(0)?.toUpperCase() }}</span>
+        </div>
+        <div class="user-info">
+          <h2>{{ user?.username }}</h2>
+          <p>{{ user?.email }}</p>
+        </div>
+      </div>
+
+      <div class="profile-body">
+        <form *ngIf="isEditing" (ngSubmit)="onSubmit()" class="edit-form">
+          <div class="form-group">
+            <label for="username">用户名</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              [(ngModel)]="formData.username" 
+              required
+              [class.error]="formErrors.username">
+            <div class="error-message" *ngIf="formErrors.username">
+              {{ formErrors.username }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">邮箱</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              [(ngModel)]="formData.email" 
+              required
+              [class.error]="formErrors.email">
+            <div class="error-message" *ngIf="formErrors.email">
+              {{ formErrors.email }}
+            </div>
+          </div>
+
+          <div class="form-messages">
+            <div class="success-message" *ngIf="submitSuccess">
+              资料更新成功！
+            </div>
+            <div class="error-message" *ngIf="submitError">
+              {{ submitError }}
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+              {{ isSubmitting ? '保存中...' : '保存更改' }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="cancelEditing()" [disabled]="isSubmitting">
+              取消
+            </button>
+          </div>
+        </form>
+
+        <div *ngIf="!isEditing" class="profile-actions">
+          <button class="btn btn-primary" (click)="startEditing()">
+            编辑资料
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

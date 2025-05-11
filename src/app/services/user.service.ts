@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface User {
   id: string;
@@ -26,12 +27,15 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    // 从localStorage恢复用户会话
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
-      this.currentUserSubject.next(JSON.parse(savedUser));
+    // 只在浏览器环境中恢复用户会话
+    if (isPlatformBrowser(this.platformId)) {
+      const savedUser = localStorage.getItem('currentUser');
+      if (savedUser) {
+        this.currentUserSubject.next(JSON.parse(savedUser));
+      }
     }
   }
 
@@ -52,13 +56,17 @@ export class UserService {
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('currentUser');
+    }
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
 
   private setCurrentUser(user: User): void {
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
     this.currentUserSubject.next(user);
   }
 
